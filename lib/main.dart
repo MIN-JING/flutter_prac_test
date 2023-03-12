@@ -176,7 +176,9 @@ class FavoritePage extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(10, 50, 10, 20),
           child: Text('你已有 ${favorites.length} 個最愛單字 pair'),
         ),
+        // https://stackoverflow.com/questions/50252569/vertical-viewport-was-given-unbounded-height
         Expanded(
+            // https://ithelp.ithome.com.tw/articles/10226338
             child: ListView.builder(
           itemCount: favorites.length,
           itemBuilder: (context, index) {
