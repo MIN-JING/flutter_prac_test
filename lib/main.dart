@@ -66,13 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
         page = GeneratorPage();
         break;
       case 1:
-        page = Placeholder();
+        page = FavoritePage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
 
-    return LayoutBuilder(builder: (context, Constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
         body: Row(
           children: [
@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: NavigationRail(
                 // extended: true 顯示圖例標籤
                 // 當最大 width >= 600 時，左側抽屜頁可擴張寬度來顯示更多內容
-                extended: Constraints.maxWidth >= 600,
+                extended: constraints.maxWidth >= 600,
                 destinations: [
                   NavigationRailDestination(
                     icon: Icon(Icons.home),
@@ -154,6 +154,21 @@ class GeneratorPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class FavoritePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+    var favorites = appState.favorites;
+
+    return Center(
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Favorite WordPair:'),
+        for (var wordPari in favorites) Text(wordPari.toString()),
+      ]),
     );
   }
 }
