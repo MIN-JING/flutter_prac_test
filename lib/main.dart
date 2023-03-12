@@ -163,23 +163,33 @@ class FavoritePage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
     var favorites = appState.favorites;
 
+    if (favorites.isEmpty) {
+      return Center(
+        child: Text('還沒有單字 pair 被加入清單'),
+      );
+    }
+
     return Center(
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Column(mainAxisSize: MainAxisSize.min, children: [
-          ListView.builder(
-            itemCount: favorites.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: Icon(Icons.favorite),
-                title: Text('第一個單字；第二個單字'),
-                subtitle: Text(
-                    '${favorites[index].first.toString()} ; ${favorites[index].second.toString()}'),
-              );
-            },
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-          )
-        ])
+      child: Column(mainAxisSize: MainAxisSize.min, children: [
+        Padding(
+          // 指定上下左右方向的填充距離
+          padding: EdgeInsets.fromLTRB(10, 50, 10, 20),
+          child: Text('你已有 ${favorites.length} 個最愛單字 pair'),
+        ),
+        Expanded(
+            child: ListView.builder(
+          itemCount: favorites.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: Icon(Icons.favorite),
+              title: Text('第一個單字；第二個單字'),
+              subtitle: Text(
+                  '${favorites[index].first.toString()} ; ${favorites[index].second.toString()}'),
+            );
+          },
+          scrollDirection: Axis.vertical,
+          shrinkWrap: false,
+        ))
       ]),
     );
   }
