@@ -1,6 +1,5 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -166,8 +165,21 @@ class FavoritePage extends StatelessWidget {
 
     return Center(
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text('Favorite WordPair:'),
-        for (var wordPari in favorites) Text(wordPari.toString()),
+        Column(mainAxisSize: MainAxisSize.min, children: [
+          ListView.builder(
+            itemCount: favorites.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Icon(Icons.favorite),
+                title: Text('第一個單字；第二個單字'),
+                subtitle: Text(
+                    '${favorites[index].first.toString()} ; ${favorites[index].second.toString()}'),
+              );
+            },
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+          )
+        ])
       ]),
     );
   }
