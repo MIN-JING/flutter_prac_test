@@ -1,6 +1,10 @@
 # flutter_application_jim
 
-A new Flutter project.
+A new Flutter project, which randomly output a word pair.
+
+You could click a button with text "favorite" for adding the word pair to a list.
+
+Than the list are presented by ListView in "Favorite" page.
 
 ## Getting Started
 
